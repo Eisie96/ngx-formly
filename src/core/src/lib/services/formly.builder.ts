@@ -1,7 +1,7 @@
 import { Injectable, Injector, Optional, ViewContainerRef } from '@angular/core';
 import { FormGroup, FormArray, FormGroupDirective } from '@angular/forms';
 import { FormlyConfig } from './formly.config';
-import { FormlyFieldConfig, FormlyFormOptions, FormlyFieldConfigCache } from '../models';
+import { FormlyFieldConfig, FormlyFormOptions, FormlyFieldConfigCache, FormlyFieldProps } from '../models';
 import { defineHiddenProp, observe, disableTreeValidityCall } from '../utils';
 
 @Injectable({ providedIn: 'root' })
@@ -41,10 +41,18 @@ export class FormlyFormBuilder {
     }
 
     const extensions = Object.values(this.config.extensions);
-    extensions.forEach((extension) => extension.prePopulate?.(field));
-    extensions.forEach((extension) => extension.onPopulate?.(field));
+
+    const extensionCallback = (callbackName: 'prePopulate' | 'onPopulate' | 'postPopulate'): FormlyFieldConfigCache => {
+      return extensions.reduce((prev, curr) => {
+        const result = curr[callbackName]?.(prev);
+        return result ? result : prev;
+      }, field);
+    };
+
+    field = extensionCallback('prePopulate');
+    field = extensionCallback('onPopulate');
     field.fieldGroup?.forEach((f) => this._build(f));
-    extensions.forEach((extension) => extension.postPopulate?.(field));
+    field = extensionCallback('postPopulate');
   }
 
   private _setOptions(field: FormlyFieldConfigCache) {

@@ -97,7 +97,8 @@
           { "path": "/examples/advanced/tabs", "label": "Tabs Form" },
           { "path": "/examples/advanced/grid-integration", "label": "ag-grid Integration" },
           { "path": "/examples/advanced/datatable-integration", "label": "ngx-datatable Integration" },
-          { "path": "/examples/advanced/extending-field-types", "label": "Extending Field Types" }
+          { "path": "/examples/advanced/extending-field-types", "label": "Extending Field Types" },
+          { "path": "/examples/advanced/custom-extension", "label": "Custom Extension" }
         ]
       },
       {

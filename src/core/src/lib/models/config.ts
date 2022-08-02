@@ -8,9 +8,9 @@ import { FieldWrapper } from '../templates/field.wrapper';
 export interface FormlyExtension<F extends FormlyFieldConfig = FormlyFieldConfig> {
   priority?: number;
 
-  prePopulate?(field: F): void;
-  onPopulate?(field: F): void;
-  postPopulate?(field: F): void;
+  prePopulate?(field: F): void | F;
+  onPopulate?(field: F): void | F;
+  postPopulate?(field: F): void | F;
 }
 
 export interface TypeOption {

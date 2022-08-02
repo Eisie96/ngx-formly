@@ -10,7 +10,7 @@ function createBuilder(option?: ConfigOption) {
 }
 
 describe('FormlyFormBuilder service', () => {
-  it('should throw error when core extension is not registred', () => {
+  it('should throw error when core extension is not registered', () => {
     const builder = createBuilder({});
 
     const build = () => builder.build({});

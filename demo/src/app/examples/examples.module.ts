@@ -186,6 +186,7 @@ import { SharedModule } from '../shared';
                 loadChildren: () =>
                   import('./advanced/extending-field-types/config.module').then((m) => m.ConfigModule),
               },
+              { path: 'custom-extension', loadChildren: () => import('./advanced/custom-extension/config.module').then((m) => m.ConfigModule) },
             ],
           },
 
